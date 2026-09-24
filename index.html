@@ -1,240 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shahd & Abdallah</title>
+  <title>Shahd & Abdallah</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  background: #f7f3ed;
-  color: #332b27;
-  font-family: Georgia, serif;
-  overflow-x: hidden;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* FIRST SCREEN */
-.cover {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px 20px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.names {
-  font-family: "Brush Script MT", cursive;
-  font-size: 48px;
-  margin-bottom: 10px;
-}
+    body {
+      margin: 0;
+      background: #f8f1ec;
+      color: #594b48;
+      font-family: "Cormorant Garamond", serif;
+      overflow-x: hidden;
+    }
 
-.intro {
-  font-size: 15px;
-  font-style: italic;
-  letter-spacing: 1px;
-  margin-bottom: 45px;
-}
+    /* =========================
+       OPENING SCREEN
+    ========================= */
 
-/* ENVELOPE */
-.envelope {
-  position: relative;
-  width: 330px;
-  height: 220px;
-  cursor: pointer;
-  margin: 0 auto;
-}
+    .opening {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background:
+        radial-gradient(circle at top, #fffaf7 0%, #f8eee9 55%, #f1e2dd 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+    }
 
-.envelope-back {
-  position: absolute;
-  inset: 0;
-  background: #e8dfd5;
-  box-shadow: 0 15px 35px rgba(0,0,0,.15);
-  border: 1px solid #d5c9bd;
-}
+    .opening.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-/* LETTER */
-.letter {
-  position: absolute;
-  left: 20px;
-  bottom: 15px;
-  width: 290px;
-  height: 175px;
-  background: #fffdf9;
-  z-index: 2;
-  padding: 25px 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,.12);
-  transition: 1.2s ease;
-}
+    .opening-content {
+      width: 90%;
+      max-width: 430px;
+      text-align: center;
+    }
 
-.letter h2 {
-  font-family: "Brush Script MT", cursive;
-  font-size: 34px;
-  margin: 15px 0 5px;
-}
+    .small-text {
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-.letter p {
-  font-size: 13px;
-  letter-spacing: 2px;
-}
+    .opening-names {
+      font-family: "Great Vibes", cursive;
+      font-size: 55px;
+      font-weight: 400;
+      color: #725d58;
+      margin: 0 0 12px;
+    }
 
-/* FLAP */
-.flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
+    .opening-subtitle {
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 42px;
+    }
 
-  border-left: 165px solid transparent;
-  border-right: 165px solid transparent;
-  border-top: 120px solid #ded4ca;
+    /* Envelope */
 
-  transform-origin: top center;
-  transition: 1s ease;
-  z-index: 4;
-}
+    .envelope {
+      position: relative;
+      width: 320px;
+      height: 215px;
+      margin: auto;
+      cursor: pointer;
+      perspective: 1000px;
+    }
 
-/* SEAL */
-.seal {
-  position: absolute;
-  left: 50%;
-  top: 95px;
-  transform: translateX(-50%);
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
+    .envelope-body {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 175px;
+      background: #eee1dc;
+      border: 1px solid #ddcdc7;
+      box-shadow: 0 18px 35px rgba(91, 69, 62, 0.18);
+      overflow: hidden;
+    }
 
-  background: #d2bca7;
-  border: 3px solid #bda58f;
+    .envelope-body::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-bottom: 90px solid #e4d4ce;
+    }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .envelope-body::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-bottom: 90px solid #e9dad5;
+    }
 
-  color: white;
-  font-size: 24px;
+    .letter {
+      position: absolute;
+      z-index: 2;
+      left: 25px;
+      bottom: 12px;
+      width: 270px;
+      height: 175px;
+      background: #fffdfa;
+      box-shadow: 0 8px 20px rgba(70, 50, 45, .12);
+      padding: 25px 10px;
+      transition: transform 1.3s cubic-bezier(.2,.7,.2,1);
+    }
 
-  z-index: 6;
-  transition: .5s ease;
-}
+    .letter-title {
+      font-family: "Great Vibes", cursive;
+      font-size: 34px;
+      color: #725d58;
+    }
 
-/* OPEN ANIMATION */
-.envelope.open .flap {
-  transform: rotateX(180deg);
-}
+    .letter-line {
+      width: 55px;
+      height: 1px;
+      background: #c9a9a0;
+      margin: 12px auto;
+    }
 
-.envelope.open .seal {
-  opacity: 0;
-}
+    .letter-text {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-.envelope.open .letter {
-  transform: translateY(-125px);
-}
-
-/* INVITATION CONTENT */
-.invitation {
-  display: none;
-  text-align: center;
-  padding: 80px 25px;
-  min-height: 100vh;
-  animation: appear 1.5s ease forwards;
-}
-
-.envelope.open + .invitation {
-  display: block;
-}
-
-.invitation h2 {
-  font-family: "Brush Script MT", cursive;
-  font-size: 50px;
-  font-weight: normal;
-}
-
-.invitation p {
-  font-size: 17px;
-  line-height: 1.8;
-}
-
-.divider {
-  width: 80px;
-  height: 1px;
-  background: #bca99a;
-  margin: 30px auto;
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
-</head>
-
-<body>
-
-<section class="cover">
-
-  <div class="names">
-    Shahd & Abdallah
-  </div>
-
-  <div class="intro">
-    Joyfully invite you to celebrate their wedding
-  </div>
-
-  <div class="envelope"
-       onclick="this.classList.toggle('open')">
-
-    <div class="envelope-back"></div>
-
-    <div class="letter">
-      <h2>Shahd & Abdallah</h2>
-      <p>OUR WEDDING</p>
-    </div>
-
-    <div class="flap"></div>
-
-    <div class="seal">
-      ♥
-    </div>
-
-  </div>
-
-  <div class="invitation">
-
-    <h2>You're Invited</h2>
-
-    <div class="divider"></div>
-
-    <p>
-      Together with their families,<br>
-      Shahd & Abdallah<br>
-      invite you to celebrate their special day.
-    </p>
-
-    <div class="divider"></div>
-
-    <p>
-      Wedding details coming soon
-    </p>
-
-  </div>
-
-</section>
-
-</body>
-</html>
+    .flap
